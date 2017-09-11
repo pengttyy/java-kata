@@ -10,6 +10,6 @@ public class SolutionTest {
         Solution solution = new Solution();
         String str = "dvdf";
         int maxLen = solution.lengthOfLongestSubstring(str);
-        assertEquals(2, maxLen);
+        assertEquals(3, maxLen);
     }
 }

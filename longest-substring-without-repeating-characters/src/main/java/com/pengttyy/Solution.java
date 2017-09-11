@@ -1,29 +1,28 @@
 package com.pengttyy;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Solution {
 
     public int lengthOfLongestSubstring(String str) {
-        List<Set<Character>> list = new ArrayList<>();
-
-        Set<Character> currentChars = new HashSet<>();
-        for (char c : str.toCharArray()) {
-            if (currentChars.contains(c)) {
-                list.add(currentChars);
-                currentChars = new HashSet<>();
+        byte[] bytes = str.getBytes();
+        int maxLen = 0;
+        Set<Byte> tempSet = new HashSet<>();
+        for (int i = 0; i < bytes.length; i++) {
+            for (int z = i; z < bytes.length; z++) {
+                if (tempSet.contains(bytes[z])) {
+                    maxLen = Math.max(maxLen, tempSet.size());
+                    tempSet.clear();
+                    break;
+                } else if (z == bytes.length - 1) {
+                    maxLen = Math.max(maxLen, tempSet.size() + 1);
+                    tempSet.clear();
+                } else {
+                    tempSet.add(bytes[z]);
+                }
             }
-            currentChars.add(c);
         }
-        list.add(currentChars);
-
-        int max = 0;
-        for (Set<Character> characters : list) {
-            max = Math.max(max, characters.size());
-        }
-        return max;
+        return maxLen;
     }
 }
