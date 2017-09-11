@@ -1,6 +1,6 @@
 package com.pengttyy;
 
-import java.util.Objects;
+import java.math.BigInteger;
 
 class Solution {
     static class ListNode {
@@ -11,13 +11,11 @@ class Solution {
         }
     }
 
-    ListNode addTwoNumber(ListNode l1, ListNode l2) {
-        //
-        Objects.requireNonNull(l1,"l1参数不可为null");
-        Objects.requireNonNull(l2,"l2参数不可为null");
+    ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
         //解析
-        int val1 = parseInt(l1);
-        int val2 = parseInt(l2);
+        BigInteger val1 = parseBitInt(l1);
+        BigInteger val2 = parseBitInt(l2);
 
         //计算
         String[] nums = calculate(val1, val2);
@@ -37,19 +35,19 @@ class Solution {
         return root;
     }
 
-    private String[] calculate(int val1, int val2) {
-        int result = val1 + val2;
+    private String[] calculate(BigInteger val1, BigInteger val2) {
+        BigInteger result = val1.add(val2);
         StringBuilder reverse = new StringBuilder().append(result).reverse();
         return reverse.toString().split("");
     }
 
-    private int parseInt(ListNode rootNode) {
+    private BigInteger parseBitInt(ListNode rootNode) {
         StringBuilder stringBuilder = new StringBuilder();
         ListNode tempListNode = rootNode;
         while (tempListNode != null) {
             stringBuilder.append(tempListNode.val);
             tempListNode = tempListNode.next;
         }
-        return Integer.parseInt(stringBuilder.reverse().toString());
+        return new BigInteger(stringBuilder.reverse().toString());
     }
 }
