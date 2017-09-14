@@ -3,14 +3,6 @@ package com.pengttyy;
 import java.math.BigInteger;
 
 class Solution {
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
     ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
         //解析
@@ -23,7 +15,6 @@ class Solution {
         //包装
         return encapsulation(nums);
     }
-
     private ListNode encapsulation(String[] nums) {
         ListNode root = new ListNode(Integer.parseInt(nums[0]));
         ListNode temp = root;
