@@ -1,7 +1,6 @@
 package com.pengttyy;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,53 +15,54 @@ public class Solution2Test {
 
     @Test
     public void addTwoNumbers_1() throws Exception {
-        ListNode l1 = new ListNode(1);
-        ListNode l2 = new ListNode(1);
-        ListNode l3 = this.solution.addTwoNumbers(l1, l2);
-        assertEquals(2, l3.val);
+        assertExecute("1", "2", "3");
     }
 
     @Test
     public void addTwoNumbers_1_2() throws Exception {
-        ListNode l1 = new ListNode(5);
-        ListNode l2 = new ListNode(7);
-        ListNode l3 = this.solution.addTwoNumbers(l1, l2);
-        assertEquals(2, l3.val);
-        assertEquals(1, l3.next.val);
+        assertExecute("5", "7", "21");
     }
 
     @Test
-    public void addTwoNumbers_2() throws Exception {
-        ListNode l1 = new ListNode(1);
-        l1.next = new ListNode(2);
-
-        ListNode l2 = new ListNode(1);
-        l2.next = new ListNode(2);
-
-        ListNode l3 = this.solution.addTwoNumbers(l1, l2);
-        assertEquals(2, l3.val);
-        assertEquals(4, l3.next.val);
-    }
-
-
-    /*@Test
-    public void addTwoNumbers_3() throws Exception {
-        ListNode l1 = new ListNode(2);
-        l1.next = new ListNode(4);
-        l1.next.next = new ListNode(3);
-
-        ListNode l2 = new ListNode(5);
-        l2.next = new ListNode(6);
-        l2.next.next = new ListNode(4);
-
-        ListNode l3 = this.solution.addTwoNumbers(l1, l2);
-        assertEquals(7, l3.val);
-        assertEquals(0, l3.next.val);
-        assertEquals(8, l3.next.next.val);
+    public void addTwoNumbers_2_1() throws Exception {
+        assertExecute("23", "54", "77");
     }
 
     @Test
-    public void name() throws Exception {
-        long value = 9999999991l;
-    }*/
+    public void addTwoNumbers_2_2() throws Exception {
+        assertExecute("243", "564", "708");
+    }
+
+    @Test
+    public void addTwoNumbers_3_1() throws Exception {
+        assertExecute("1835", "13", "2145");
+    }
+
+    @Test
+    public void addTwoNumbers_3_2() throws Exception {
+        assertExecute("899", "2", "0001");
+    }
+
+    private void assertExecute(String arg1, String arg2, String expected) {
+        ListNode l3 = this.solution.addTwoNumbers(encapsulation(arg1), encapsulation(arg2));
+        StringBuilder actualSb = new StringBuilder();
+        ListNode temp = l3;
+        while (temp != null) {
+            actualSb.append(temp.val);
+            temp = temp.next;
+        }
+        assertEquals(expected, actualSb.toString());
+    }
+
+    private ListNode encapsulation(String str) {
+        String[] nums = str.split("");
+        ListNode root = new ListNode(Integer.parseInt(nums[0]));
+        ListNode temp = root;
+        for (int i = 1; i < nums.length; i++) {
+            ListNode listNode = new ListNode(Integer.parseInt(nums[i]));
+            temp.next = listNode;
+            temp = listNode;
+        }
+        return root;
+    }
 }

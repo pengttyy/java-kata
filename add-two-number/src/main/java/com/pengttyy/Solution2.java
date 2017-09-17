@@ -4,28 +4,45 @@ package com.pengttyy;
  * Created by wseng9 on 2017/9/12.
  */
 public class Solution2 {
+    boolean offset = false;
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode rootNode = null;
+        ListNode root = l1;
+        root.val = cal(l1.val + l2.val);
 
-        ListNode tempNode1 = l1;
-        ListNode tempNode2 = l2;
-        int offset = 0;
-        while (tempNode1 != null && tempNode2 != null) {
-            int val = tempNode1.val + tempNode2.val + offset;
-            offset = 0;
-            if (val >= 10) {
-                rootNode = new ListNode(val % 10);
-                offset = 1;
-                return rootNode;
+        ListNode current = root;
+        ListNode tempListNodel1 = l1.next;
+        ListNode tempListNodel2 = l2.next;
+        while (tempListNodel1 != null && tempListNodel2 != null) {
+            tempListNodel1.val = (cal(tempListNodel1.val + tempListNodel2.val));
+            current = current.next = tempListNodel1;
+            tempListNodel1 = tempListNodel1.next;
+            tempListNodel2 = tempListNodel2.next;
+        }
+
+        ListNode listNode = tempListNodel1 != null ? tempListNodel1 : tempListNodel2;
+        while (listNode != null) {
+            current = current.next = listNode;
+            listNode.val = cal(listNode.val);
+            if (!offset) {
+                return root;
             }
+            listNode = listNode.next;
         }
 
-        int x = l1.val + l2.val;
-        if (x >= 10) {
-            rootNode = new ListNode(x % 10);
-            rootNode.next = new ListNode(1);
-            return rootNode;
+        if (offset) {
+            current.next = new ListNode(1);
         }
-        return new ListNode(x);
+        return root;
+    }
+
+    private int cal(int num) {
+        int val = num + (offset ? 1 : 0);
+        if (val >= 10) {
+            offset = true;
+            return val % 10;
+        }
+        offset = false;
+        return val;
     }
 }
