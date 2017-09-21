@@ -9,6 +9,7 @@
     <module>add-two-number</module>
     <module>longest-substring-without-repeating-characters</module>
       <module>median-of-two-sorted-arrays</module>
+      <module>reverse_integer</module>
   </modules>
   <packaging>pom</packaging>
 
