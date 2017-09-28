@@ -10,6 +10,8 @@
     <module>longest-substring-without-repeating-characters</module>
       <module>median-of-two-sorted-arrays</module>
       <module>reverse_integer</module>
+      <module>longest-palindromic-substring</module>
+      <module>string_to_integer</module>
   </modules>
   <packaging>pom</packaging>
 
